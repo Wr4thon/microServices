@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak
+  namespace: sso
+  labels:
+    component: keycloak
+    app: sso
+spec:
+  selector:
+    matchLabels:
+      component: keycloak
+      app: sso
+  template:
+    metadata:
+      labels:
+        component: keycloak
+        app: sso
+    spec:
+      containers:
+      - name: keycloak 
+        image: jboss/keycloak:9.0.2
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "1000m"
+        ports:
+        - containerPort: 8080
+          name: keycloak
